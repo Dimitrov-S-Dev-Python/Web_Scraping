@@ -4,11 +4,14 @@ from send_email import send_email
 
 URL = "http://programmer100.pythonanywhere.com/tours/"
 
+"INSERT INTO events VALUES ('Tigers', 'Tiger City', '2088.10.14')"
+
 message_info = """\
 Subject: Hi!
 
 New Event was found.
 """
+
 
 def scrape(url):
     """Scrape the page source from the URL"""
@@ -42,4 +45,3 @@ if __name__ == "__main__":
             store(extracted)
             send_email(message_info)
             print("new_email")
-
