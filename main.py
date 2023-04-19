@@ -1,8 +1,14 @@
 import requests
 import selectorlib
+from send_email import send_email
 
 URL = "http://programmer100.pythonanywhere.com/tours/"
 
+message_info = """\
+Subject: Hi!
+
+New Event was found.
+"""
 
 def scrape(url):
     """Scrape the page source from the URL"""
@@ -15,10 +21,6 @@ def extract(source):
     extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
     value = extractor.extract(source)["tours"]
     return value
-
-
-def send_email():
-    print("Email was send")
 
 
 def store(info):
@@ -38,5 +40,6 @@ if __name__ == "__main__":
     if extracted != "No upcoming tours":
         if extracted not in content:
             store(extracted)
-            send_email()
+            send_email(message_info)
+            print("new_email")
 
